@@ -43,8 +43,15 @@ public class DashBoardFormController {
     private AnchorPane Load;
 
     @FXML
-    void btnDashboardOnAction(ActionEvent event) {
+    void btnDashboardOnAction(ActionEvent event) throws IOException {
+        AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/View/dashboard_form.fxml"));
 
+        Scene scene = new Scene(rootNode);
+
+        Stage stage = (Stage) this.root.getScene().getWindow();
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.setTitle("Dashboard Form");
     }
 
     @FXML
