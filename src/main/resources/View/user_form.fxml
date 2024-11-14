@@ -13,15 +13,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane fx:id="root" prefHeight="588.0" prefWidth="1000.0" style="-fx-background-color: #89377f; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.UserFormController">
+<AnchorPane fx:id="root" prefHeight="588.0" prefWidth="1000.0" style="-fx-background-color: #8DDEF1; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.UserFormController">
    <children>
-      <Text fill="WHITE" layoutX="426.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage User">
+      <Text fill="#212884" layoutX="426.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage User">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <Label layoutX="72.0" layoutY="109.0" text="User Id:" textFill="WHITE">
+      <Label layoutX="72.0" layoutY="109.0" text="User Id:" textFill="#212884">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -31,7 +30,7 @@
             <Font size="10.0" />
          </font>
       </TextField>
-      <Label layoutX="468.0" layoutY="109.0" text="User Name:" textFill="WHITE">
+      <Label layoutX="468.0" layoutY="109.0" text="User Name:" textFill="#212884">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -41,12 +40,12 @@
             <Font size="10.0" />
          </font>
       </TextField>
-      <Label layoutX="468.0" layoutY="171.0" text="Role:" textFill="WHITE">
+      <Label layoutX="468.0" layoutY="171.0" text="Role:" textFill="#212884">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="72.0" layoutY="167.0" text="Password:" textFill="WHITE">
+      <Label layoutX="72.0" layoutY="167.0" text="Password:" textFill="#212884">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -59,7 +58,7 @@
             <Font size="10.0" />
          </font>
       </TextField>
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="838.0" layoutY="119.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #f7b7f1;" text="Update">
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="838.0" layoutY="119.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #212884;" text="Update" textFill="WHITE">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -74,7 +73,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="838.0" layoutY="160.0" onAction="#btnSaveOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #f7b7f1;" text="Save">
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="838.0" layoutY="160.0" onAction="#btnSaveOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #212884;" text="Save" textFill="WHITE">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -89,7 +88,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="838.0" layoutY="201.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #f7b7f1;" text="Clear" textFill="#101010">
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="838.0" layoutY="201.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #212884;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -104,7 +103,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="838.0" layoutY="243.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #f7b7f1;" text="Delete">
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="838.0" layoutY="243.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #212884;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>

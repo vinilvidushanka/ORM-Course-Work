@@ -15,19 +15,19 @@
 
 <AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.LoginFormController">
    <children>
-      <AnchorPane fx:id="rootNode" accessibleRole="TEXT_FIELD" prefHeight="600.0" prefWidth="475.0" style="-fx-background-color: #89377f;">
+      <AnchorPane fx:id="rootNode" accessibleRole="TEXT_FIELD" prefHeight="600.0" prefWidth="475.0" style="-fx-background-color: #8DDEF1;">
          <children>
-            <Label layoutX="108.0" layoutY="216.0" text="Username" textFill="WHITE">
+            <Label layoutX="108.0" layoutY="216.0" text="Username" textFill="#212884">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="123.0" layoutY="131.0" text="The Culinary Academy" textFill="WHITE">
+            <Label layoutX="123.0" layoutY="131.0" text="The Culinary Academy" textFill="#212884">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="175.0" layoutY="98.0" text="WELCOME TO" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="175.0" layoutY="98.0" text="WELCOME TO" textAlignment="CENTER" textFill="#212884">
                <font>
                   <Font name="Banwic Light" size="18.0" />
                </font>
@@ -38,8 +38,11 @@
                   <String fx:value="edge-button" />
                </styleClass>
             </TextField>
-            <Label layoutX="108.0" layoutY="282.0" text="Password" textFill="WHITE" />
-            <JFXButton blendMode="SRC_ATOP" buttonType="RAISED" cache="true" graphicTextGap="9.0" layoutX="105.0" layoutY="377.0" onAction="#btnLoginOnAction" prefHeight="32.0" prefWidth="256.0" style="-fx-background-color: #ffffff;" styleClass="edge button" text="Login" textFill="#89377f">
+            <Label layoutX="108.0" layoutY="282.0" text="Password" textFill="#212884">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <JFXButton blendMode="SRC_ATOP" buttonType="RAISED" cache="true" graphicTextGap="9.0" layoutX="105.0" layoutY="377.0" onAction="#btnLoginOnAction" prefHeight="32.0" prefWidth="256.0" style="-fx-background-color: #ffffff;" styleClass="edge button" text="Login" textFill="#212884">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -50,20 +53,15 @@
                   <Glow />
                </effect>
             </JFXButton>
-            <Label layoutX="90.0" layoutY="451.0" text="Don't have an account?" textFill="WHITE" />
-            <Hyperlink layoutX="253.0" layoutY="449.0" onAction="#linkRegistrationOnAction" prefHeight="22.0" prefWidth="121.0" text="Register on here" textFill="WHITE" />
+            <Label layoutX="90.0" layoutY="451.0" text="Don't have an account?" textFill="#212884" />
+            <Hyperlink layoutX="253.0" layoutY="449.0" onAction="#linkRegistrationOnAction" prefHeight="22.0" prefWidth="121.0" text="Register on here" textFill="#212884" />
             <PasswordField fx:id="txtPassword" layoutX="105.0" layoutY="300.0" prefHeight="28.0" prefWidth="256.0" promptText="Password" />
          </children>
       </AnchorPane>
-      <ImageView fitHeight="297.0" fitWidth="398.0" layoutX="542.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="600.0" fitWidth="526.0" layoutX="474.0">
          <image>
-            <Image url="@../Assets/HOTEL-STAFF-ILLUSTRATION.png" />
+            <Image url="@../Assets/377297-PBLCTE-187.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="615.0" layoutY="446.0" text="The Culinary Academy" textFill="#89377f">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>
