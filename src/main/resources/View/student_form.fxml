@@ -2,9 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -73,16 +73,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <RadioButton fx:id="btnMale" layoutX="464.0" layoutY="254.0" mnemonicParsing="false" text="Male" textFill="#212884">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="btnFemale" layoutX="576.0" layoutY="254.0" mnemonicParsing="false" text="Female" textFill="#212884">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </RadioButton>
       <Label layoutX="461.0" layoutY="220.0" text="Gender:" textFill="#212884">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -158,5 +148,6 @@
             <TableColumn fx:id="colGender" prefWidth="112.00006103515625" text="Gender" />
          </columns>
       </TableView>
+      <ComboBox fx:id="cmbGender" layoutX="458.0" layoutY="251.0" prefHeight="30.0" prefWidth="276.0" />
    </children>
 </AnchorPane>
