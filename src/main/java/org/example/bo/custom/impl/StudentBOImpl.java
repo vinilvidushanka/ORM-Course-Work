@@ -4,6 +4,7 @@ import org.example.bo.custom.StudentBO;
 import org.example.dao.Custom.StudentDAO;
 import org.example.dao.Custom.impl.StudentDAOImpl;
 import org.example.dto.StudentDto;
+import org.example.entity.Student;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public boolean save(StudentDto studentDto) {
-        return false;
+        return studentDAO.save(new Student(studentDto.getId(), studentDto.getName(), studentDto.getAddress(), studentDto.getContact(), studentDto.getBirthDay(), studentDto.getGender()));
     }
 
     @Override

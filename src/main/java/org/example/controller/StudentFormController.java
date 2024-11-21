@@ -11,6 +11,7 @@ import org.example.bo.custom.impl.StudentBOImpl;
 import org.example.dto.StudentDto;
 import org.example.tm.StudentTm;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class StudentFormController {
@@ -57,7 +58,7 @@ public class StudentFormController {
     @FXML
     private TextField txtName;
     @FXML
-    private ComboBox<?> cmbGender;
+    private ComboBox<String> cmbGender;
 
 
     StudentBO studentBO = new StudentBOImpl();
@@ -65,6 +66,22 @@ public class StudentFormController {
     public void initialize(){
         setCellValueFactory();
         loadAllStudents();
+
+        cmbGender.getItems().addAll("Male", "Female");
+        tblStudent.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                setFieldsWithSelectedRowData(newValue);
+            }
+        });
+    }
+
+    private void setFieldsWithSelectedRowData(StudentTm selectedStudent) {
+        txtId.setText(selectedStudent.getId());
+        txtName.setText(selectedStudent.getName());
+        txtAddress.setText(selectedStudent.getAddress());
+        txtContact.setText(selectedStudent.getContact());
+        btnDOB.setValue(LocalDate.parse(selectedStudent.getBirthDay()));
+        cmbGender.setValue(selectedStudent.getGender());
     }
 
     private List<StudentDto> loadAllStudents() {
