@@ -11,6 +11,7 @@ import org.example.bo.custom.impl.StudentBOImpl;
 import org.example.dto.StudentDto;
 import org.example.tm.StudentTm;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -137,7 +138,7 @@ public class StudentFormController {
     }
 
     @FXML
-    void btnSaveOnAction(ActionEvent event) {
+    void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         boolean isSaved = studentBO.save(new StudentDto(
                 txtId.getText(),
                 txtName.getText(),

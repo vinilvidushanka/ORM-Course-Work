@@ -1,28 +1,19 @@
-package org.example.entity;
+package org.example.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "admin")
-public class Admin {
-    @Id
-    @Column(name = "user_id",length = 20)
+public class UserDto {
     private  String userId;
-    @Column(name = "user_name")
     private String userName;
-    @Column(name = "password")
     private  String password;
+    private String role;
 
-    public Admin() {
+    public UserDto() {
     }
 
-    public Admin(String userId, String userName, String password) {
+    public UserDto(String userId, String userName, String password, String role) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
+        this.role = role;
     }
 
     public String getUserId() {
@@ -49,12 +40,21 @@ public class Admin {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
-        return "Admin{" +
+        return "UserDto{" +
                 "userId='" + userId + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

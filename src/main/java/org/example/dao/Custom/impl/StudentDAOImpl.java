@@ -6,12 +6,18 @@ import org.example.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {
     @Override
-    public List<Student> getAll() {
-        return null;
+    public List<Student> getAll() throws SQLException, ClassNotFoundException{
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        List<Student> students = session.createQuery("FROM Student").list();
+        transaction.commit();
+        session.close();
+        return students;
     }
 
     @Override

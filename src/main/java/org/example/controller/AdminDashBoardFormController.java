@@ -19,7 +19,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class DashBoardFormController {
+public class AdminDashBoardFormController {
 
     public void initialize(){
         initClock();
@@ -44,7 +44,7 @@ public class DashBoardFormController {
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) throws IOException {
-        AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/View/dashboard_form.fxml"));
+        AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/View/admin_dashboard_form.fxml"));
 
         Scene scene = new Scene(rootNode);
 

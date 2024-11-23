@@ -1,22 +1,19 @@
-package org.example.dto;
+package org.example.tm;
 
-public class AdminDto {
+public class UserTm {
     private  String userId;
     private String userName;
     private  String password;
+    private String role;
 
-    public AdminDto() {
+    public UserTm() {
     }
 
-    public AdminDto(String userId, String userName, String password) {
+    public UserTm(String userId, String userName, String password, String role) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
-    }
-
-    public AdminDto(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
+        this.role = role;
     }
 
     public String getUserId() {
@@ -41,5 +38,23 @@ public class AdminDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "UserTm{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }
