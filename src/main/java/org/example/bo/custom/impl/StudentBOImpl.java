@@ -5,7 +5,9 @@ import org.example.dao.Custom.StudentDAO;
 import org.example.dao.Custom.impl.StudentDAOImpl;
 import org.example.dao.DAOFactory;
 import org.example.dto.StudentDto;
+import org.example.dto.UserDto;
 import org.example.entity.Student;
+import org.example.entity.User;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public boolean save(StudentDto studentDto) throws SQLException, ClassNotFoundException {
-        return studentDAO.save(new Student(studentDto.getId(), studentDto.getName(), studentDto.getAddress(), studentDto.getContact(), studentDto.getBirthDay(), studentDto.getGender()));
+        return studentDAO.save(new Student(studentDto.getId(), studentDto.getName(),studentDto.getAddress(),studentDto.getContact(),studentDto.getBirthDay(),studentDto.getGender()));
     }
 
     @Override
@@ -26,8 +28,8 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public boolean delete(StudentDto studentDto) {
-        return false;
+    public boolean delete(String id) {
+        return studentDAO.delete(id);
     }
 
     @Override
@@ -42,17 +44,12 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public List<StudentDto> getAllStudents() throws SQLException, ClassNotFoundException {
-        List<Student> all=studentDAO.getAll();
-        List<StudentDto> list = new ArrayList<>();
-
-        if (all == null) {
-            return null;
-        } else {
-            for (Student student: all){
-                list.add(new StudentDto(student.getId(),student.getName(),student.getAddress(),student.getContact(),student.getBirthDay(),student.getGender()));
-            }
-            return list;
+        List<StudentDto> allStudents= new ArrayList<>();
+        List<Student> all = studentDAO.getAll();
+        for (Student student : all) {
+            allStudents.add(new StudentDto(student.getId(), student.getName(), student.getAddress(), student.getContact(),student.getBirthDay(),student.getGender()));
         }
+        return allStudents;
     }
 
     @Override

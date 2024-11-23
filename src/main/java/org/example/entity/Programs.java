@@ -6,9 +6,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "programs")
-public class Programs implements Serializable {
+public class Programs  {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "program_id")
     private String id;
 

@@ -6,10 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.example.bo.BOFactory;
 import org.example.bo.custom.StudentBO;
+import org.example.bo.custom.UserBO;
 import org.example.bo.custom.impl.StudentBOImpl;
 import org.example.dto.StudentDto;
+import org.example.dto.UserDto;
 import org.example.tm.StudentTm;
+import org.example.tm.UserTm;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -62,7 +66,7 @@ public class StudentFormController {
     private ComboBox<String> cmbGender;
 
 
-    StudentBO studentBO = new StudentBOImpl();
+    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.STUDENT);
 
     public void initialize(){
         setCellValueFactory();
@@ -93,8 +97,6 @@ public class StudentFormController {
 
             for (StudentDto studentDto : studentList) {
                 String formattedBirthDay = studentDto.getBirthDay().toString();
-
-                // Create StudentTm object with the formatted data
                 StudentTm studentTm = new StudentTm(
                         studentDto.getId(),
                         studentDto.getName(),
@@ -104,16 +106,13 @@ public class StudentFormController {
                         studentDto.getGender()
                 );
 
-                // Add each student to the ObservableList
                 obList.add(studentTm);
             }
 
-            // Set the ObservableList in the TableView
             tblStudent.setItems(obList);
 
         } catch (Exception e) {
-            // Improved error alert with specific details
-            new Alert(Alert.AlertType.ERROR, "Error loading students: " + e.getMessage(), ButtonType.OK).show();
+            new Alert(Alert.AlertType.ERROR, "Error loading users: " + e.getMessage(), ButtonType.OK).show();
         }
         return null;
     }
@@ -150,9 +149,9 @@ public class StudentFormController {
         if (isSaved) {
             loadAllStudents();
             clearFields();
-            new Alert(Alert.AlertType.CONFIRMATION, "Student Saved").show();
+            new Alert(Alert.AlertType.CONFIRMATION, "User Saved").show();
         } else {
-            new Alert(Alert.AlertType.ERROR, "Student UnSaved").show();
+            new Alert(Alert.AlertType.ERROR, "User UnSaved").show();
         }
     }
 

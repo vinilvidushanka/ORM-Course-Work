@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ProgramsBO extends SuperBO {
-    boolean save(ProgramsDto programDto);
+    boolean save(ProgramsDto programDto) throws SQLException, ClassNotFoundException;
     boolean update(ProgramsDto programDto);
     boolean delete(ProgramsDto programDto);
     Programs search(String programCode) throws SQLException;

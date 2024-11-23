@@ -41,8 +41,9 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void delete(User entity) {
+    public boolean delete(String id) {
 
+        return false;
     }
 
     @Override

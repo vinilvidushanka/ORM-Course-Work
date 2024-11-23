@@ -7,6 +7,6 @@ public interface CrudDAO <T>  extends SuperDao{
     List<T> getAll() throws SQLException, ClassNotFoundException;
     boolean save(T entity)  throws SQLException, ClassNotFoundException;
     void update(T entity)  ;
-    void delete(T entity)  ;
+    boolean delete(String id)  ;
     T search(String id) ;
 }

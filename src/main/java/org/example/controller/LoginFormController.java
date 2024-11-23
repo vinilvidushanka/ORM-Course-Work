@@ -58,7 +58,14 @@ public class LoginFormController {
                 stage.centerOnScreen();
                 stage.setTitle("Dashboard Form");
             }else {
-                new Alert(Alert.AlertType.ERROR,"Please Check role !!").show();
+                AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/View/coordinator_dashboard_form.fxml"));
+
+                Scene scene = new Scene(rootNode);
+
+                Stage stage = (Stage) this.rootNode.getScene().getWindow();
+                stage.setScene(scene);
+                stage.centerOnScreen();
+                stage.setTitle("Dashboard Form");
             }
 
             //SignInForm.getScene().getWindow().hide();

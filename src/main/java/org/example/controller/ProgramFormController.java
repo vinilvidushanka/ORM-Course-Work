@@ -7,11 +7,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import org.example.bo.BOFactory;
 import org.example.bo.custom.ProgramsBO;
+import org.example.bo.custom.UserBO;
 import org.example.bo.custom.impl.ProgramsBOImpl;
 import org.example.dto.ProgramsDto;
+import org.example.dto.UserDto;
+import org.example.entity.Programs;
+import org.example.entity.User;
 import org.example.tm.ProgramsTm;
+import org.example.tm.UserTm;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProgramFormController {
@@ -46,7 +53,8 @@ public class ProgramFormController {
     @FXML
     private TextField txtName;
 
-    ProgramsBO programsBO=new ProgramsBOImpl();
+    ProgramsBO programsBO = (ProgramsBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROGRAMS);
+    ObservableList<Programs> observableList;
 
     public void initialize(){
         setCellValueFactory();
@@ -63,16 +71,17 @@ public class ProgramFormController {
         txtId.setText(newValue.getId());
         txtName.setText(newValue.getName());
         txtDuration.setText(newValue.getDuration());
-        txtFee.setText(String.valueOf(newValue.getFee()));
+        txtFee.setText(newValue.getFee());
     }
 
     private void loadAllPrograms() {
         ObservableList<ProgramsTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<ProgramsDto> programList = programsBO.getAllPrograms();
+            List<ProgramsDto> programsList = programsBO.getAllPrograms();
 
-            for (ProgramsDto programsDto : programList) {
+            for (ProgramsDto programsDto : programsList) {
+
                 ProgramsTm programsTm = new ProgramsTm(
                         programsDto.getId(),
                         programsDto.getName(),
@@ -86,7 +95,7 @@ public class ProgramFormController {
             tblProgram.setItems(obList);
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Error loading programs: " + e.getMessage(), ButtonType.OK).show();
+            new Alert(Alert.AlertType.ERROR, "Error loading programss: " + e.getMessage(), ButtonType.OK).show();
         }
     }
 
@@ -108,13 +117,27 @@ public class ProgramFormController {
     }
 
     @FXML
-    void btnSaveOnAction(ActionEvent event) {
+    void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         boolean isSaved = programsBO.save(new ProgramsDto(
                 txtId.getText(),
                 txtName.getText(),
                 txtDuration.getText(),
                 txtFee.getText()
         ));
+        if (isSaved) {
+            loadAllPrograms();
+            clearFields();
+            new Alert(Alert.AlertType.CONFIRMATION, "User Saved").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "User UnSaved").show();
+        }
+    }
+
+    private void clearFields() {
+        txtId.clear();
+        txtName.clear();
+        txtDuration.clear();
+        txtFee.clear();
     }
 
     @FXML

@@ -18,6 +18,7 @@ import org.example.tm.UserTm;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class UserFormController {
 
@@ -108,12 +109,25 @@ public class UserFormController {
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
-
+        txtId.clear();
+        txtName.clear();
+        txtPassword.clear();
     }
 
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {
+    void btnDeleteOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
+        if (result.orElse(no) == yes) {
+            if (!userBO.deleteUser(ID)) {
+                new Alert(Alert.AlertType.ERROR, "Error!!").show();
+            }
+        }
+//        generateNextUserId();
+        clearFields();
+        loadAllUsers();
     }
 
     @FXML
