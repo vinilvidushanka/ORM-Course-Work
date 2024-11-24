@@ -23,12 +23,12 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public boolean update(StudentDto studentDto) {
-        return false;
+    public boolean update(StudentDto studentDto) throws SQLException, ClassNotFoundException{
+        return studentDAO.update(new Student(studentDto.getId(), studentDto.getName(), studentDto.getAddress(), studentDto.getContact(), studentDto.getBirthDay(), studentDto.getGender()));
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(String id)throws SQLException, ClassNotFoundException {
         return studentDAO.delete(id);
     }
 

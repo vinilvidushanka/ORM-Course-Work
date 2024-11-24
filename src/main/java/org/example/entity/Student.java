@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "student")
-public class Student implements Serializable {
+public class Student {
     @Id
     @Column(name = "student_id")
     private String id;

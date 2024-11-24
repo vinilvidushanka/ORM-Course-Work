@@ -38,16 +38,22 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public void update(Student entity) {
-
+    public boolean update(Student entity) {
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(entity);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
     public boolean delete(String id) {
+
         Session session = SessionFactoryConfig.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
-        String sql = "DELETE FROM student WHERE id = :id";
+        String sql = "DELETE FROM student WHERE student_id = :id";
         NativeQuery<Student> nativeQuery = session.createNativeQuery(sql);
         nativeQuery.setParameter("id",id);
         nativeQuery.executeUpdate();

@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import com.sun.mail.imap.protocol.ID;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,12 +13,15 @@ import org.example.bo.custom.UserBO;
 import org.example.bo.custom.impl.StudentBOImpl;
 import org.example.dto.StudentDto;
 import org.example.dto.UserDto;
+import org.example.entity.Student;
 import org.example.tm.StudentTm;
 import org.example.tm.UserTm;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class StudentFormController {
 
@@ -67,6 +71,8 @@ public class StudentFormController {
 
 
     StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.STUDENT);
+    String id;
+    ObservableList<Student> observableList;
 
     public void initialize(){
         setCellValueFactory();
@@ -132,8 +138,20 @@ public class StudentFormController {
     }
 
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {
+    void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
+        String id = txtId.getText();
+        if (result.orElse(no) == yes) {
+            if (!studentBO.delete(id)) {
+                new Alert(Alert.AlertType.ERROR, "Error!!").show();
+            }
+        }
+//        generateNextUserId();
+        clearFields();
+        loadAllStudents();
     }
 
     @FXML
@@ -165,8 +183,21 @@ public class StudentFormController {
     }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) {
+    void btnUpdateOnAction(ActionEvent event) throws SQLException, ClassNotFoundException{
+        String sid=txtId.getText();
+        String name = txtName.getText();
+        String address = txtAddress.getText();
+        String contact = txtContact.getText();
+        LocalDate dob = LocalDate.parse(String.valueOf(btnDOB.getValue()));
+        String gender = cmbGender.getValue();
 
+        if(studentBO.update(new StudentDto(sid,name,address,contact,dob,gender))){
+            new Alert(Alert.AlertType.CONFIRMATION, "Update Successfully!!").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Error!!").show();
+        }
+        clearFields();
+        loadAllStudents();
     }
 
     @FXML

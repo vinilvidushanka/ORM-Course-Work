@@ -36,8 +36,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void update(User entity) {
-
+    public boolean update(User entity) {
+        return false;
     }
 
     @Override
