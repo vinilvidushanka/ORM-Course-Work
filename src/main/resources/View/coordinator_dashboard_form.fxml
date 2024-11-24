@@ -3,14 +3,64 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="root" prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.CoordinatorDashBoardFormController">
    <children>
-      <AnchorPane fx:id="Load" layoutX="272.0" layoutY="79.0" prefHeight="588.0" prefWidth="1000.0" style="-fx-background-color: #8DDEF1; -fx-background-radius: 20;" />
+      <AnchorPane fx:id="Load" layoutX="272.0" layoutY="79.0" prefHeight="588.0" prefWidth="1000.0" style="-fx-background-color: #8DDEF1; -fx-background-radius: 20;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="114.0" layoutX="147.0" layoutY="59.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="263.0" />
+            <Label layoutX="262.0" layoutY="75.0" text="Student Count" textFill="#1f2881">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView layoutX="182.0" layoutY="84.0">
+               <image>
+                  <Image url="@../Assets/icons8-students-64.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="114.0" layoutX="574.0" layoutY="59.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="263.0" />
+            <Label layoutX="683.0" layoutY="75.0" text="Programs Count" textFill="#1f2881">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblProgramsCount" layoutX="719.0" layoutY="110.0" prefHeight="35.0" prefWidth="66.0" textAlignment="CENTER" textFill="#1f2881">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <ImageView layoutX="596.0" layoutY="84.0">
+               <image>
+                  <Image url="@../Assets/icons8-courses-64.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblStudentCount" layoutX="298.0" layoutY="110.0" prefHeight="35.0" prefWidth="66.0" textAlignment="CENTER" textFill="#1f2881">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tblProgram" layoutX="70.0" layoutY="287.0" prefHeight="245.0" prefWidth="878.0">
+               <columns>
+                  <TableColumn fx:id="colID" prefWidth="166.3999900817871" text="Program Id" />
+                  <TableColumn fx:id="colName" prefWidth="289.59999084472656" text="Program Name" />
+                  <TableColumn fx:id="colDuration" prefWidth="224.79998779296875" text="Duration" />
+                  <TableColumn fx:id="colFee" prefWidth="198.40008544921875" text="Fee" />
+               </columns>
+            </TableView>
+            <Label layoutX="376.0" layoutY="223.0" text="Our Training Programs " textFill="#1f2881">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
       <JFXButton buttonType="RAISED" layoutX="34.0" layoutY="234.0" onAction="#btnDashboardOnAction" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: #8DDEF1;" text="Dash Board">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -101,7 +151,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <Label fx:id="lblTime" layoutX="958.0" layoutY="37.0" prefHeight="31.0" prefWidth="314.0" textFill="#89377f">
+      <Label fx:id="lblTime" layoutX="957.0" layoutY="28.0" prefHeight="31.0" prefWidth="314.0" textFill="#89377f">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -111,5 +161,10 @@
             <Image url="@../Assets/A_letter_tech_logo__1_-removebg-preview.png" />
          </image>
       </ImageView>
+      <Label layoutX="601.0" layoutY="26.0" text="Coordinator Dashboard" textFill="#1f2881">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

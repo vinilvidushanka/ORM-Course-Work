@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -45,6 +47,19 @@
                   <Image url="@../Assets/icons8-courses-64.png" />
                </image>
             </ImageView>
+            <TableView fx:id="tblProgram" layoutX="61.0" layoutY="284.0" prefHeight="245.0" prefWidth="878.0">
+               <columns>
+                  <TableColumn fx:id="colID" prefWidth="166.3999900817871" text="Program Id" />
+                  <TableColumn fx:id="colName" prefWidth="289.59999084472656" text="Program Name" />
+                  <TableColumn fx:id="colDuration" prefWidth="224.79998779296875" text="Duration" />
+                  <TableColumn fx:id="colFee" prefWidth="198.40008544921875" text="Fee" />
+               </columns>
+            </TableView>
+            <Label layoutX="367.0" layoutY="220.0" text="Our Training Programs " textFill="#1f2881">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
       <JFXButton buttonType="RAISED" layoutX="24.0" layoutY="224.0" onAction="#btnDashboardOnAction" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: #8DDEF1;" text="Dash Board">
          <font>
@@ -136,7 +151,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <Label fx:id="lblTime" layoutX="948.0" layoutY="27.0" prefHeight="31.0" prefWidth="314.0" textFill="#89377f">
+      <Label fx:id="lblTime" layoutX="947.0" layoutY="18.0" prefHeight="31.0" prefWidth="314.0" textFill="#89377f">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -146,5 +161,10 @@
             <Image url="@../Assets/A_letter_tech_logo__1_-removebg-preview.png" />
          </image>
       </ImageView>
+      <Label layoutX="591.0" layoutY="16.0" text="Admin Dashboard" textFill="#1f2881">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

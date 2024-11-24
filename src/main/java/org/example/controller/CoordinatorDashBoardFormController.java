@@ -4,21 +4,28 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.bo.BOFactory;
+import org.example.bo.custom.ProgramsBO;
+import org.example.dto.ProgramsDto;
+import org.example.tm.ProgramsTm;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class CoordinatorDashBoardFormController {
 
@@ -30,9 +37,65 @@ public class CoordinatorDashBoardFormController {
 
     @FXML
     private AnchorPane root;
+    @FXML
+    private Label lblProgramsCount;
+
+    @FXML
+    private Label lblStudentCount;
+
+    @FXML
+    private TableColumn<?, ?> colDuration;
+
+    @FXML
+    private TableColumn<?, ?> colFee;
+
+    @FXML
+    private TableColumn<?, ?> colID;
+
+    @FXML
+    private TableColumn<?, ?> colName;
+
+    @FXML
+    private TableView<ProgramsTm> tblProgram;
+
+    ProgramsBO programsBO = (ProgramsBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROGRAMS);
 
     public void initialize(){
         initClock();
+        loadAllPrograms();
+        setCellValueFactory();
+    }
+
+    private void loadAllPrograms() {
+        ObservableList<ProgramsTm> obList = FXCollections.observableArrayList();
+
+        try {
+            List<ProgramsDto> programsList = programsBO.getAllPrograms();
+
+            for (ProgramsDto programsDto : programsList) {
+
+                ProgramsTm programsTm = new ProgramsTm(
+                        programsDto.getId(),
+                        programsDto.getName(),
+                        programsDto.getDuration(),
+                        programsDto.getFee()
+                );
+
+                obList.add(programsTm);
+            }
+
+            tblProgram.setItems(obList);
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Error loading programss: " + e.getMessage(), ButtonType.OK).show();
+        }
+    }
+
+    private void setCellValueFactory() {
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        colFee.setCellValueFactory(new PropertyValueFactory<>("fee"));
     }
 
     private void initClock() {
@@ -67,13 +130,21 @@ public class CoordinatorDashBoardFormController {
     }
 
     @FXML
-    void btnPaymentOnAction(ActionEvent event) {
-
+    void btnPaymentOnAction(ActionEvent event) throws IOException {
+        URL resource = getClass().getResource("/View/payment_form.fxml");
+        assert resource != null;
+        Parent load = FXMLLoader.load(resource);
+        Load.getChildren().clear();
+        Load.getChildren().add(load);
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1), Load);
+        transition.setFromX(load.getScene().getWidth());
+        transition.setToX(0);
+        transition.play();
     }
 
     @FXML
     void btnProgramOnAction(ActionEvent event) {
-        new Alert(Alert.AlertType.CONFIRMATION, "Oooops! Only Admin can access Progams Form!!").show();
+        new Alert(Alert.AlertType.WARNING, "Oooops! Only Admin can access Progams Form!!").show();
     }
 
     @FXML
@@ -91,7 +162,7 @@ public class CoordinatorDashBoardFormController {
 
     @FXML
     void btnUserOnAction(ActionEvent event) {
-        new Alert(Alert.AlertType.CONFIRMATION, "Oooops! Only Admin can access User Form!!").show();
+        new Alert(Alert.AlertType.WARNING, "Oooops! Only Admin can access User Form!!").show();
     }
 
 }
