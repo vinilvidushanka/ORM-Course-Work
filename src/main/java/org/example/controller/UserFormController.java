@@ -17,6 +17,7 @@ import org.example.tm.UserTm;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -120,8 +121,9 @@ public class UserFormController {
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
         Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
+        String id = txtId.getText();
         if (result.orElse(no) == yes) {
-            if (!userBO.deleteUser(ID)) {
+            if (!userBO.deleteUser(id)) {
                 new Alert(Alert.AlertType.ERROR, "Error!!").show();
             }
         }
@@ -155,8 +157,19 @@ public class UserFormController {
     }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) {
+    void btnUpdateOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        String uid=txtId.getText();
+        String name = txtName.getText();
+        String password = txtPassword.getText();
+        String role = cmbRole.getValue();
 
+        if(userBO.updateUser(new UserDto(uid,name,password,role))){
+            new Alert(Alert.AlertType.CONFIRMATION, "Update Successfully!!").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Error!!").show();
+        }
+        clearFields();
+        loadAllUsers();
     }
 
     @FXML

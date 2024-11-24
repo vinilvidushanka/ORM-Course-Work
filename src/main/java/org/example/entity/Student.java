@@ -27,16 +27,24 @@ public class Student {
     @Column(name = "gender")
     private String gender;
 
+    @Column(name = "register_date")
+    private LocalDate regDate;
+
+    @Column(name = "program")
+    private String program;
+
     public Student() {
     }
 
-    public Student(String id, String name, String address, String contact, LocalDate birthDay, String gender) {
+    public Student(String id, String name, String address, String contact, LocalDate birthDay, String gender, LocalDate regDate, String program) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.contact = contact;
         this.birthDay = birthDay;
         this.gender = gender;
+        this.regDate = regDate;
+        this.program = program;
     }
 
     public String getId() {
@@ -87,6 +95,22 @@ public class Student {
         this.gender = gender;
     }
 
+    public LocalDate getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(LocalDate regDate) {
+        this.regDate = regDate;
+    }
+
+    public String getProgram() {
+        return program;
+    }
+
+    public void setProgram(String program) {
+        this.program = program;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -96,6 +120,8 @@ public class Student {
                 ", contact='" + contact + '\'' +
                 ", birthDay=" + birthDay +
                 ", gender='" + gender + '\'' +
+                ", regDate=" + regDate +
+                ", program='" + program + '\'' +
                 '}';
     }
 }

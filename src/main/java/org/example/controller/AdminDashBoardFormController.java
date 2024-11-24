@@ -13,17 +13,33 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.config.SessionFactoryConfig;
+import org.example.entity.Student;
+import org.example.entity.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class AdminDashBoardFormController {
 
-    public void initialize(){
+    private int studentCount;
+
+    public void initialize() throws IOException {
         initClock();
+
+
     }
+
+
 
     private void initClock() {
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
@@ -35,12 +51,24 @@ public class AdminDashBoardFormController {
     }
 
     @FXML
+    private Label lblProgramsCount;
+
+    @FXML
+    private Label lblStudentCount;
+    @FXML
     private Label lblTime;
     @FXML
     private AnchorPane root;
     public AnchorPane rootNode;
     @FXML
     private AnchorPane Load;
+
+
+    private void setStudentCount(int studentCount) {
+        lblStudentCount.setText(String.valueOf(studentCount));
+    }
+
+
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) throws IOException {
@@ -56,7 +84,7 @@ public class AdminDashBoardFormController {
 
     @FXML
     void btnLogOutOnAction(ActionEvent event) throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/login_form.fxml"));
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/View/login_form.fxml"));
 
         Stage stage = (Stage) root.getScene().getWindow();
         stage.setScene(new Scene(anchorPane));

@@ -1,5 +1,7 @@
 package org.example.tm;
 
+import java.time.LocalDate;
+
 public class ProgramsTm {
     private String id;
     private String name;
@@ -48,13 +50,15 @@ public class ProgramsTm {
         this.fee = fee;
     }
 
+
+
     @Override
     public String toString() {
         return "ProgramsTm{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", duration='" + duration + '\'' +
-                ", fee=" + fee +
+                ", fee='" + fee + '\'' +
                 '}';
     }
 }

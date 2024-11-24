@@ -19,12 +19,12 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public boolean save(StudentDto studentDto) throws SQLException, ClassNotFoundException {
-        return studentDAO.save(new Student(studentDto.getId(), studentDto.getName(),studentDto.getAddress(),studentDto.getContact(),studentDto.getBirthDay(),studentDto.getGender()));
+        return studentDAO.save(new Student(studentDto.getId(), studentDto.getName(),studentDto.getAddress(),studentDto.getContact(),studentDto.getBirthDay(),studentDto.getGender(),studentDto.getRegDate(),studentDto.getProgram()));
     }
 
     @Override
     public boolean update(StudentDto studentDto) throws SQLException, ClassNotFoundException{
-        return studentDAO.update(new Student(studentDto.getId(), studentDto.getName(), studentDto.getAddress(), studentDto.getContact(), studentDto.getBirthDay(), studentDto.getGender()));
+        return studentDAO.update(new Student(studentDto.getId(), studentDto.getName(), studentDto.getAddress(), studentDto.getContact(), studentDto.getBirthDay(), studentDto.getGender(),studentDto.getRegDate(),studentDto.getProgram()));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class StudentBOImpl implements StudentBO {
         List<StudentDto> allStudents= new ArrayList<>();
         List<Student> all = studentDAO.getAll();
         for (Student student : all) {
-            allStudents.add(new StudentDto(student.getId(), student.getName(), student.getAddress(), student.getContact(),student.getBirthDay(),student.getGender()));
+            allStudents.add(new StudentDto(student.getId(), student.getName(), student.getAddress(),student.getContact(), student.getBirthDay(),student.getGender(),student.getRegDate(),student.getProgram()));
         }
         return allStudents;
     }

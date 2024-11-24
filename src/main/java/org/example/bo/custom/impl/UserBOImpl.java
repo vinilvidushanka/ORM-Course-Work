@@ -6,6 +6,7 @@ import org.example.dao.Custom.UserDAO;
 import org.example.dao.Custom.impl.UserDAOImpl;
 import org.example.dao.DAOFactory;
 import org.example.dto.UserDto;
+import org.example.entity.Student;
 import org.example.entity.User;
 import org.hibernate.Session;
 
@@ -32,8 +33,8 @@ public class UserBOImpl implements UserBO {
     }
 
     @Override
-    public boolean updateUser(UserDto dto) throws SQLException, ClassNotFoundException, IOException {
-        return false;
+    public boolean updateUser(UserDto userDto) throws SQLException, ClassNotFoundException, IOException {
+        return userDAO.update(new User(userDto.getUserId(), userDto.getUserName(), userDto.getPassword(), userDto.getRole()));
     }
 
     @Override

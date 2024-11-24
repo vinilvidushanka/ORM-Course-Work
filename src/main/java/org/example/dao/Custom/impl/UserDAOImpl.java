@@ -2,6 +2,7 @@ package org.example.dao.Custom.impl;
 
 import org.example.config.SessionFactoryConfig;
 import org.example.dao.Custom.UserDAO;
+import org.example.entity.Student;
 import org.example.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -37,13 +38,27 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User entity) {
-        return false;
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(entity);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(String id) throws SQLException, ClassNotFoundException{
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
 
-        return false;
+        String sql = "DELETE FROM user WHERE user_id = :id";
+        NativeQuery<User> nativeQuery = session.createNativeQuery(sql);
+        nativeQuery.setParameter("id",id);
+        nativeQuery.executeUpdate();
+
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override

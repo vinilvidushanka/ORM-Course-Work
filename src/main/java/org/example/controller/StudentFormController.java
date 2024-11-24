@@ -27,6 +27,10 @@ public class StudentFormController {
 
     @FXML
     private DatePicker btnDOB;
+    @FXML
+    private DatePicker btnRegDate;
+    @FXML
+    private ComboBox<String> cmbProgram;
 
     @FXML
     private RadioButton btnFemale;
@@ -68,6 +72,12 @@ public class StudentFormController {
     private TextField txtName;
     @FXML
     private ComboBox<String> cmbGender;
+    @FXML
+    private TableColumn<?, ?> colProgram;
+
+    @FXML
+    private TableColumn<?, ?> colRegDate;
+
 
 
     StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.STUDENT);
@@ -79,6 +89,7 @@ public class StudentFormController {
         loadAllStudents();
 
         cmbGender.getItems().addAll("Male", "Female");
+        cmbProgram.getItems().addAll("Professional Cooking", "Baking & Pastry Arts","International Cuisine ","Culinary Management","Food Safety and Hygiene ");
         tblStudent.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 setFieldsWithSelectedRowData(newValue);
@@ -93,6 +104,8 @@ public class StudentFormController {
         txtContact.setText(selectedStudent.getContact());
         btnDOB.setValue(LocalDate.parse(selectedStudent.getBirthDay()));
         cmbGender.setValue(selectedStudent.getGender());
+        btnRegDate.setValue(LocalDate.parse(selectedStudent.getRegDate()));
+        cmbProgram.setValue(selectedStudent.getProgram());
     }
 
     private List<StudentDto> loadAllStudents() {
@@ -103,13 +116,16 @@ public class StudentFormController {
 
             for (StudentDto studentDto : studentList) {
                 String formattedBirthDay = studentDto.getBirthDay().toString();
+                String formattedRegDay = studentDto.getRegDate().toString();
                 StudentTm studentTm = new StudentTm(
                         studentDto.getId(),
                         studentDto.getName(),
                         studentDto.getAddress(),
                         studentDto.getContact(),
                         formattedBirthDay,
-                        studentDto.getGender()
+                        studentDto.getGender(),
+                        formattedRegDay,
+                        studentDto.getProgram()
                 );
 
                 obList.add(studentTm);
@@ -130,6 +146,8 @@ public class StudentFormController {
         colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
         colDOB.setCellValueFactory(new PropertyValueFactory<>("birthDay"));
         colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        colRegDate.setCellValueFactory(new PropertyValueFactory<>("regDate"));
+        colProgram.setCellValueFactory(new PropertyValueFactory<>("program"));
     }
 
     @FXML
@@ -162,7 +180,9 @@ public class StudentFormController {
                 txtAddress.getText(),
                 txtContact.getText(),
                 btnDOB.getValue(),
-                (String) cmbGender.getValue()
+                (String) cmbGender.getValue(),
+                btnRegDate.getValue(),
+                (String) cmbProgram.getValue()
         ));
         if (isSaved) {
             loadAllStudents();
@@ -180,6 +200,8 @@ public class StudentFormController {
         txtContact.setText("");
         btnDOB.setValue(null);
         cmbGender.getSelectionModel().clearSelection();
+        btnRegDate.setValue(null);
+        cmbProgram.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -190,8 +212,10 @@ public class StudentFormController {
         String contact = txtContact.getText();
         LocalDate dob = LocalDate.parse(String.valueOf(btnDOB.getValue()));
         String gender = cmbGender.getValue();
+        LocalDate reg = LocalDate.parse(String.valueOf(btnRegDate.getValue()));
+        String program = cmbProgram.getValue();
 
-        if(studentBO.update(new StudentDto(sid,name,address,contact,dob,gender))){
+        if(studentBO.update(new StudentDto(sid,name,address,contact,dob,gender,reg,program))){
             new Alert(Alert.AlertType.CONFIRMATION, "Update Successfully!!").show();
         }else {
             new Alert(Alert.AlertType.ERROR, "Error!!").show();
