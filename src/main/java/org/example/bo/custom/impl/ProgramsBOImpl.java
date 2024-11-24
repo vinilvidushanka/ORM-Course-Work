@@ -2,13 +2,10 @@ package org.example.bo.custom.impl;
 
 import org.example.bo.custom.ProgramsBO;
 import org.example.dao.Custom.ProgramsDAO;
-import org.example.dao.Custom.UserDAO;
-import org.example.dao.Custom.impl.ProgramsDAOImpl;
 import org.example.dao.DAOFactory;
 import org.example.dto.ProgramsDto;
-import org.example.dto.UserDto;
 import org.example.entity.Programs;
-import org.example.entity.User;
+import org.example.entity.Student;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,13 +20,13 @@ public class ProgramsBOImpl implements ProgramsBO {
     }
 
     @Override
-    public boolean update(ProgramsDto programDto) {
-        return false;
+    public boolean update(ProgramsDto programDto) throws SQLException, ClassNotFoundException {
+        return programsDAO.update(new Programs(programDto.getId(), programDto.getName(), programDto.getDuration(), programDto.getFee()));
     }
 
     @Override
-    public boolean delete(ProgramsDto programDto) {
-        return false;
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return programsDAO.delete(id);
     }
 
     @Override

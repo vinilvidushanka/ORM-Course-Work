@@ -3,6 +3,7 @@ package org.example.dao.Custom.impl;
 import org.example.config.SessionFactoryConfig;
 import org.example.dao.Custom.ProgramsDAO;
 import org.example.entity.Programs;
+import org.example.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
@@ -35,13 +36,27 @@ public class ProgramsDAOImpl implements ProgramsDAO {
 
     @Override
     public boolean update(Programs entity) {
-        return false;
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(entity);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
     public boolean delete(String id) {
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
 
-        return false;
+        String sql = "DELETE FROM programs WHERE program_id = :id";
+        NativeQuery<Programs> nativeQuery = session.createNativeQuery(sql);
+        nativeQuery.setParameter("id",id);
+        nativeQuery.executeUpdate();
+
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override

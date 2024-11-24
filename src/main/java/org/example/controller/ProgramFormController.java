@@ -12,6 +12,7 @@ import org.example.bo.custom.ProgramsBO;
 import org.example.bo.custom.UserBO;
 import org.example.bo.custom.impl.ProgramsBOImpl;
 import org.example.dto.ProgramsDto;
+import org.example.dto.StudentDto;
 import org.example.dto.UserDto;
 import org.example.entity.Programs;
 import org.example.entity.User;
@@ -19,7 +20,9 @@ import org.example.tm.ProgramsTm;
 import org.example.tm.UserTm;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class ProgramFormController {
 
@@ -112,8 +115,20 @@ public class ProgramFormController {
     }
 
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {
+    void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException{
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
+        String id = txtId.getText();
+        if (result.orElse(no) == yes) {
+            if (!programsBO.delete(id)) {
+                new Alert(Alert.AlertType.ERROR, "Error!!").show();
+            }
+        }
+//        generateNextUserId();
+        clearFields();
+        loadAllPrograms();
     }
 
     @FXML
@@ -141,8 +156,19 @@ public class ProgramFormController {
     }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) {
+    void btnUpdateOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        String pid=txtId.getText();
+        String name = txtName.getText();
+        String duration = txtDuration.getText();
+        String fee = txtFee.getText();
 
+        if(programsBO.update(new ProgramsDto(pid,name,duration,fee))){
+            new Alert(Alert.AlertType.CONFIRMATION, "Update Successfully!!").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Error!!").show();
+        }
+        clearFields();
+        loadAllPrograms();
     }
 
     @FXML
