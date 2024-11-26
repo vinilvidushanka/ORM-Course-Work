@@ -41,12 +41,12 @@
             <Font size="10.0" />
          </font>
       </TextField>
-      <Label layoutX="458.0" layoutY="147.0" text="Contact:" textFill="#212884">
+      <Label layoutX="459.0" layoutY="168.0" text="Contact:" textFill="#212884">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtContact" layoutX="457.0" layoutY="167.0" prefHeight="30.0" prefWidth="276.0">
+      <TextField fx:id="txtContact" layoutX="458.0" layoutY="188.0" prefHeight="30.0" prefWidth="276.0">
          <cursor>
             <Cursor fx:constant="CLOSED_HAND" />
          </cursor>
@@ -54,12 +54,12 @@
             <Font size="10.0" />
          </font>
       </TextField>
-      <Label layoutX="62.0" layoutY="143.0" text="Address:" textFill="#212884">
+      <Label layoutX="63.0" layoutY="164.0" text="Address:" textFill="#212884">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtAddress" layoutX="61.0" layoutY="166.0" prefHeight="30.0" prefWidth="276.0">
+      <TextField fx:id="txtAddress" layoutX="62.0" layoutY="187.0" prefHeight="30.0" prefWidth="276.0">
          <cursor>
             <Cursor fx:constant="CLOSED_HAND" />
          </cursor>
@@ -67,13 +67,13 @@
             <Font size="10.0" />
          </font>
       </TextField>
-      <DatePicker fx:id="btnDOB" layoutX="61.0" layoutY="233.0" prefHeight="30.0" prefWidth="276.0" />
-      <Label layoutX="62.0" layoutY="206.0" text="Date Of Birth:" textFill="#212884">
+      <DatePicker fx:id="btnDOB" layoutX="61.0" layoutY="268.0" prefHeight="30.0" prefWidth="276.0" />
+      <Label layoutX="62.0" layoutY="241.0" text="Date Of Birth:" textFill="#212884">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="461.0" layoutY="206.0" text="Gender:" textFill="#212884">
+      <Label layoutX="461.0" layoutY="241.0" text="Gender:" textFill="#212884">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -93,7 +93,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="828.0" layoutY="169.0" onAction="#btnSaveOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #212884;" text="Save" textFill="WHITE">
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="828.0" layoutY="160.0" onAction="#btnSaveOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #212884;" text="Save" textFill="WHITE">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -108,7 +108,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="828.0" layoutY="236.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #212884;" text="Clear" textFill="WHITE">
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="828.0" layoutY="215.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #212884;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -123,7 +123,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="828.0" layoutY="315.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #212884;" text="Delete" textFill="WHITE">
+      <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="828.0" layoutY="272.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #212884;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -138,30 +138,16 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <TableView fx:id="tblStudent" layoutX="61.0" layoutY="374.0" prefHeight="190.0" prefWidth="878.0">
+      <TableView fx:id="tblStudent" layoutX="61.0" layoutY="338.0" prefHeight="226.0" prefWidth="878.0">
          <columns>
-            <TableColumn fx:id="colID" prefWidth="68.00000381469727" text="Student Id" />
-            <TableColumn fx:id="colName" prefWidth="144.7999725341797" text="Student Name" />
-            <TableColumn fx:id="colAddress" prefWidth="129.60000610351562" text="Address" />
-            <TableColumn fx:id="colContact" prefWidth="104.00006103515625" text="Contact" />
-            <TableColumn fx:id="colDOB" prefWidth="108.0" text="Date Of Birth" />
-            <TableColumn fx:id="colGender" prefWidth="71.199951171875" text="Gender" />
-            <TableColumn fx:id="colRegDate" prefWidth="109.60009765625" text="Registed date" />
-            <TableColumn fx:id="colProgram" prefWidth="143.9998779296875" text="Program" />
+            <TableColumn fx:id="colID" prefWidth="103.99999618530273" text="Student Id" />
+            <TableColumn fx:id="colName" prefWidth="195.99998474121094" text="Student Name" />
+            <TableColumn fx:id="colAddress" prefWidth="144.7999267578125" text="Address" />
+            <TableColumn fx:id="colContact" prefWidth="158.4000244140625" text="Contact" />
+            <TableColumn fx:id="colDOB" prefWidth="140.800048828125" text="Date Of Birth" />
+            <TableColumn fx:id="colGender" prefWidth="135.99993896484375" text="Gender" />
          </columns>
       </TableView>
-      <ComboBox fx:id="cmbGender" layoutX="458.0" layoutY="237.0" prefHeight="30.0" prefWidth="276.0" />
-      <DatePicker fx:id="btnRegDate" layoutX="62.0" layoutY="307.0" prefHeight="30.0" prefWidth="276.0" />
-      <Label layoutX="63.0" layoutY="280.0" text="Registed Date:" textFill="#212884">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="462.0" layoutY="280.0" text="Program:" textFill="#212884">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="cmbProgram" layoutX="459.0" layoutY="311.0" prefHeight="30.0" prefWidth="276.0" />
+      <ComboBox fx:id="cmbGender" layoutX="458.0" layoutY="272.0" prefHeight="30.0" prefWidth="276.0" />
    </children>
 </AnchorPane>

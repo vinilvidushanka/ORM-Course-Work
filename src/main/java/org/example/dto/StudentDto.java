@@ -9,21 +9,18 @@ public class StudentDto {
     private String contact;
     private LocalDate birthDay;
     private String gender;
-    private LocalDate regDate;
-    private String program;
+
 
     public StudentDto() {
     }
 
-    public StudentDto(String id, String name, String address, String contact, LocalDate birthDay, String gender, LocalDate regDate, String program) {
+    public StudentDto(String id, String name, String address, String contact, LocalDate birthDay, String gender) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.contact = contact;
         this.birthDay = birthDay;
         this.gender = gender;
-        this.regDate = regDate;
-        this.program = program;
     }
 
     public String getId() {
@@ -74,21 +71,7 @@ public class StudentDto {
         this.gender = gender;
     }
 
-    public LocalDate getRegDate() {
-        return regDate;
-    }
 
-    public void setRegDate(LocalDate regDate) {
-        this.regDate = regDate;
-    }
-
-    public String getProgram() {
-        return program;
-    }
-
-    public void setProgram(String program) {
-        this.program = program;
-    }
 
     @Override
     public String toString() {
@@ -98,9 +81,7 @@ public class StudentDto {
                 ", address='" + address + '\'' +
                 ", contact='" + contact + '\'' +
                 ", birthDay=" + birthDay +
-                ", gender='" + gender + '\'' +
-                ", regDate=" + regDate +
-                ", program='" + program + '\'' +
+                ", gender='" + gender + '\''+
                 '}';
     }
 }
