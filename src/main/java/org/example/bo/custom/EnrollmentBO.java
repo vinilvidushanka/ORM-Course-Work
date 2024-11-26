@@ -2,6 +2,7 @@ package org.example.bo.custom;
 
 import org.example.bo.SuperBO;
 import org.example.dto.EnrollmentDto;
+import org.example.entity.Enrollment;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,4 +17,12 @@ public interface EnrollmentBO extends SuperBO {
     boolean saveEnrollment(EnrollmentDto enrollmentDto) throws Exception;
 
     String generateNewEnrollmentID() throws Exception;
+
+    List<String> getAllEnrollmentIds() throws SQLException, ClassNotFoundException;
+
+    Enrollment findEnrollmentById(String eid);
+
+    double getRemainingFeeByEnrollmentId(String eid);
+
+    boolean updateRemainingFee(String eid, double updatedRemainFee);
 }

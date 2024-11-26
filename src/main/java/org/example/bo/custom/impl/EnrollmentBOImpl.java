@@ -70,4 +70,29 @@ public class EnrollmentBOImpl implements EnrollmentBO {
     public String generateNewEnrollmentID() throws Exception {
         return enrollmentDAO.generateNewID();
     }
+
+    @Override
+    public List<String> getAllEnrollmentIds() throws SQLException, ClassNotFoundException {
+        List<String> enrollmentIds = new ArrayList<>();
+        List<Enrollment> enrollments = enrollmentDAO.getAll();
+        for (Enrollment enrollment : enrollments) {
+            enrollmentIds.add(enrollment.getEid());
+        }
+        return enrollmentIds;
+    }
+
+    @Override
+    public Enrollment findEnrollmentById(String enrollmentId) {
+        return enrollmentDAO.findEnrollmentById(enrollmentId);
+    }
+
+    @Override
+    public double getRemainingFeeByEnrollmentId(String enrollmentId) {
+        return enrollmentDAO.getRemainingFeeByEnrollmentId(enrollmentId);
+    }
+
+    @Override
+    public boolean updateRemainingFee(String enrollmentId, double newFee) {
+        return enrollmentDAO.updateRemainingFee(enrollmentId,newFee);
+    }
 }

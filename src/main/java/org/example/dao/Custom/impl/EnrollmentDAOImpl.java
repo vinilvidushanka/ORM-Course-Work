@@ -5,6 +5,7 @@ import org.example.dao.Custom.EnrollmentDAO;
 import org.example.entity.Enrollment;
 import org.example.entity.Programs;
 import org.example.entity.Student;
+import org.example.tm.EnrollmentTm;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -96,6 +97,82 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
             } else {
                 return "E001";
             }
+        }
+    }
+
+    @Override
+    public Enrollment findEnrollmentById(String enrollmentId) {
+        Transaction transaction = null;
+        Enrollment enrollment = null;
+
+        try (Session session = SessionFactoryConfig.getInstance().getSession()) {
+            transaction = session.beginTransaction();
+
+            Query<Enrollment> query = session.createQuery("FROM Enrollment e WHERE e.id = :id", Enrollment.class);
+            query.setParameter("id", enrollmentId);
+            enrollment = query.uniqueResult();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            throw e;
+        }
+
+        return enrollment;
+    }
+
+    @Override
+    public double getRemainingFeeByEnrollmentId(String enrollmentId) {
+        Transaction transaction = null;
+        Double remainFee = null;
+
+        try (Session session = SessionFactoryConfig.getInstance().getSession()) {
+            transaction = session.beginTransaction();
+
+            Query<Enrollment> query = session.createQuery("FROM Enrollment e WHERE e.id = :id", Enrollment.class);
+            query.setParameter("id", enrollmentId);
+            Enrollment enrollment = query.uniqueResult();
+
+            transaction.commit();
+
+
+            if (enrollment != null) {
+                remainFee = enrollment.getRemainingfee();
+            } else {
+                throw new Exception("Enrollment ID not found!");
+            }
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            try {
+                throw e;
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
+        return remainFee;
+    }
+
+    @Override
+    public boolean updateRemainingFee(String enrollmentId, double newFee) {
+        Transaction transaction = null;
+
+        try (Session session = SessionFactoryConfig.getInstance().getSession()) {
+            transaction = session.beginTransaction();
+
+
+            Query query = session.createQuery("UPDATE Enrollment e SET e.remainingfee = :newFee WHERE e.id = :id");
+            query.setParameter("newFee", newFee);
+            query.setParameter("id", enrollmentId);
+
+            int result = query.executeUpdate();
+
+            transaction.commit();
+
+            return result > 0;
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            throw e;
         }
     }
 }

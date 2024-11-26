@@ -5,13 +5,13 @@ import java.time.LocalDate;
 public class PaymentDto {
     private String id;
     private String eid;
-    private String amount;
+    private Double amount;
     private LocalDate date;
 
     public PaymentDto() {
     }
 
-    public PaymentDto(String id, String eid, String amount, LocalDate date) {
+    public PaymentDto(String id, String eid, Double amount, LocalDate date) {
         this.id = id;
         this.eid = eid;
         this.amount = amount;
@@ -34,11 +34,11 @@ public class PaymentDto {
         this.eid = eid;
     }
 
-    public String getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
