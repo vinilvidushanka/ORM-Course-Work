@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface StudentDAO extends CrudDAO<Student> {
 //    List<Student> getAll() throws SQLException, ClassNotFoundException;
-
+public Student getStudentById(String studentId) throws Exception;
 
 }

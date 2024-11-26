@@ -67,6 +67,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public boolean IdExists(String id) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
     public boolean checkPassword(String username, String password) throws IOException {
         Session session = SessionFactoryConfig.getInstance().getSession();
         Transaction transaction = session.beginTransaction();

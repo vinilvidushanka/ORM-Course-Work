@@ -2,8 +2,6 @@ package org.example.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -11,55 +9,31 @@ import javafx.scene.control.TextField;
 public class PaymentsFormController {
 
     @FXML
-    private DatePicker btnDate;
+    private TableColumn<?, ?> colAmount;
 
     @FXML
-    private ComboBox<?> cmbDescription;
+    private TableColumn<?, ?> colDate;
 
     @FXML
-    private TableColumn<?, ?> colAddress;
-
-    @FXML
-    private TableColumn<?, ?> colContact;
-
-    @FXML
-    private TableColumn<?, ?> colDOB;
-
-    @FXML
-    private TableColumn<?, ?> colGender;
+    private TableColumn<?, ?> colEnrollId;
 
     @FXML
     private TableColumn<?, ?> colID;
 
     @FXML
-    private TableColumn<?, ?> colName;
+    private TableView<?> tblPayment;
 
     @FXML
-    private TableColumn<?, ?> colProgram;
+    private TextField txtAmount;
 
     @FXML
-    private TableColumn<?, ?> colRegDate;
+    private TextField txtDate;
 
     @FXML
-    private TableView<?> tblStudent;
-
-    @FXML
-    private TextField txtFee;
-
-    @FXML
-    private TextField txtPayment;
+    private TextField txtEnrollmentId;
 
     @FXML
     private TextField txtPaymentId;
-
-    @FXML
-    private TextField txtProgram;
-
-    @FXML
-    private TextField txtRemainingAmount;
-
-    @FXML
-    private TextField txtStName;
 
     @FXML
     void btnClearOnAction(ActionEvent event) {

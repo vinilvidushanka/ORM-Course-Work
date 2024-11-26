@@ -43,4 +43,19 @@ public class ProgramsBOImpl implements ProgramsBO {
         }
         return allPrograms;
     }
+
+    @Override
+    public List<String> getAllProgramIds() throws SQLException, ClassNotFoundException {
+        List<String> programIds = new ArrayList<>();
+        List<Programs> courses = programsDAO.getAll();
+        for (Programs programs : courses) {
+            programIds.add(programs.getId());
+        }
+        return programIds;
+    }
+
+    @Override
+    public Programs getProgramById(String courseId) throws Exception {
+        return programsDAO.getProgramById(courseId);
+    }
 }

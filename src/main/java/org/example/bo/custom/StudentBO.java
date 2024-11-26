@@ -2,6 +2,7 @@ package org.example.bo.custom;
 
 import org.example.bo.SuperBO;
 import org.example.dto.StudentDto;
+import org.example.entity.Student;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,4 +17,8 @@ public interface StudentBO extends SuperBO {
     public List<StudentDto> getAllStudents() throws SQLException, ClassNotFoundException;
 
     String generateNewId();
+
+    List<String> getAllStudentIds() throws SQLException, ClassNotFoundException;
+
+    public Student getStudentById(String studentId) throws Exception;
 }

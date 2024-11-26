@@ -6,12 +6,12 @@ public class ProgramsTm {
     private String id;
     private String name;
     private String duration;
-    private String fee;
+    private double fee;
 
     public ProgramsTm() {
     }
 
-    public ProgramsTm(String id, String name, String duration, String fee) {
+    public ProgramsTm(String id, String name, String duration, double fee) {
         this.id = id;
         this.name = name;
         this.duration = duration;
@@ -42,11 +42,11 @@ public class ProgramsTm {
         this.duration = duration;
     }
 
-    public String getFee() {
+    public double getFee() {
         return fee;
     }
 
-    public void setFee(String fee) {
+    public void setFee(double fee) {
         this.fee = fee;
     }
 

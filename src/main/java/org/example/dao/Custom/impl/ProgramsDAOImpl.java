@@ -63,4 +63,27 @@ public class ProgramsDAOImpl implements ProgramsDAO {
     public Programs search(String id) {
         return null;
     }
+
+    @Override
+    public boolean IdExists(String id) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public Programs getProgramById(String courseId) {
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction tx = session.beginTransaction();
+
+        try {
+            // Fetch the course object based on the ID
+            Programs programs = session.get(Programs.class, courseId);
+            tx.commit();  // Commit the transaction
+            return programs;
+        } catch (Exception e) {
+            tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
 }
