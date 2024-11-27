@@ -101,7 +101,7 @@ public class PaymentsFormController {
         List<PaymentDto> allPayment = paymentBO.getAllPayment();
 
         for (PaymentDto paymentDTO : allPayment){
-            observableList.add(new PaymentTm(paymentDTO.getId(),paymentDTO.getAmount(),paymentDTO.getEid(),paymentDTO.getDate()));
+            observableList.add(new PaymentTm(paymentDTO.getId(),paymentDTO.getEid(),paymentDTO.getAmount(),paymentDTO.getDate()));
         }
         tblPayment.setItems(observableList);
     }

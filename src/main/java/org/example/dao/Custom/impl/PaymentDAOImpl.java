@@ -24,7 +24,12 @@ public class PaymentDAOImpl implements PaymentDAO {
 
     @Override
     public boolean save(Payment entity) throws SQLException, ClassNotFoundException {
-        return false;
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction tx = session.beginTransaction();
+        session.save(entity);
+        tx.commit();
+        session.close();
+        return true;
     }
 
     @Override

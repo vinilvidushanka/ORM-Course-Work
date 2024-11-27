@@ -8,7 +8,7 @@ public class PaymentTm {
     private Double amount;
     private LocalDate date;
 
-    public PaymentTm(String id, Double amount, String eid, LocalDate date) {
+    public PaymentTm() {
     }
 
     public PaymentTm(String id, String eid, Double amount, LocalDate date) {
