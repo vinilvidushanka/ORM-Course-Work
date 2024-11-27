@@ -11,9 +11,11 @@ import org.example.bo.custom.EnrollmentBO;
 import org.example.bo.custom.ProgramsBO;
 import org.example.bo.custom.StudentBO;
 import org.example.dto.EnrollmentDto;
+import org.example.dto.ProgramsDto;
 import org.example.entity.Programs;
 import org.example.entity.Student;
 import org.example.tm.EnrollmentTm;
+import org.example.tm.ProgramsTm;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -88,6 +90,7 @@ public class EnrollmentFormController {
             getAllEnrollments();
             loadStudentIds();
             loadProgramsIds();
+            setCellValueFactory();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -138,13 +141,39 @@ public class EnrollmentFormController {
     }
 
     private void getAllEnrollments() throws SQLException, ClassNotFoundException {
-        tblEnrollment.getItems().clear();
-        observableList = FXCollections.observableArrayList();
-        List<EnrollmentDto> allenrollment = enrollmentBo.getAllEnrollment();
+//        tblEnrollment.getItems().clear();
+//        observableList = FXCollections.observableArrayList();
+//        List<EnrollmentDto> allenrollment = enrollmentBo.getAllEnrollment();
+//
+//        for (EnrollmentDto enrollmentDTO : allenrollment){
+//            observableList.add(new EnrollmentTm(enrollmentDTO.getEid(),enrollmentDTO.getSid(),enrollmentDTO.getStudentname(),enrollmentDTO.getCid(),enrollmentDTO.getCoursename(),enrollmentDTO.getDate(),enrollmentDTO.getUpfrontpayment(),enrollmentDTO.getRemainingfee()));
+//            tblEnrollment.setItems(observableList);
+//        }
+        ObservableList<EnrollmentTm> obList = FXCollections.observableArrayList();
 
-        for (EnrollmentDto enrollmentDTO : allenrollment){
-            observableList.add(new EnrollmentTm(enrollmentDTO.getEid(),enrollmentDTO.getSid(),enrollmentDTO.getStudentname(),enrollmentDTO.getCid(),enrollmentDTO.getCoursename(),enrollmentDTO.getDate(),enrollmentDTO.getUpfrontpayment(),enrollmentDTO.getRemainingfee()));
-            tblEnrollment.setItems(observableList);
+        try {
+            List<EnrollmentDto> enrollmentList = enrollmentBo.getAllEnrollment();
+
+            for (EnrollmentDto enrollmentDto : enrollmentList) {
+
+                EnrollmentTm enrollmentTm = new EnrollmentTm(
+                        enrollmentDto.getEid(),
+                        enrollmentDto.getSid(),
+                        enrollmentDto.getStudentname(),
+                        enrollmentDto.getCid(),
+                        enrollmentDto.getCoursename(),
+                        enrollmentDto.getDate(),
+                        enrollmentDto.getUpfrontpayment(),
+                        enrollmentDto.getRemainingfee()
+                );
+
+                obList.add(enrollmentTm);
+            }
+
+            tblEnrollment.setItems(obList);
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Error loading programss: " + e.getMessage(), ButtonType.OK).show();
         }
     }
 
