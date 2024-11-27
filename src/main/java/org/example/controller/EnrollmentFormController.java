@@ -121,8 +121,8 @@ public class EnrollmentFormController {
         colProgramId.setCellValueFactory(new PropertyValueFactory<>("cid"));
         colProgram.setCellValueFactory(new PropertyValueFactory<>("Coursename"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        colTotalFee.setCellValueFactory(new PropertyValueFactory<>("upfrontpayment"));
-        colUpfrontFee.setCellValueFactory(new PropertyValueFactory<>("remainingfee"));
+        colTotalFee.setCellValueFactory(new PropertyValueFactory<>("remainingfee"));
+        colUpfrontFee.setCellValueFactory(new PropertyValueFactory<>("upfrontpayment"));
     }
 
     private void loadProgramsIds() throws SQLException, ClassNotFoundException {
@@ -143,7 +143,7 @@ public class EnrollmentFormController {
         List<EnrollmentDto> allenrollment = enrollmentBo.getAllEnrollment();
 
         for (EnrollmentDto enrollmentDTO : allenrollment){
-            observableList.add(new EnrollmentTm(enrollmentDTO.getEid(),enrollmentDTO.getSid(),enrollmentDTO.getStudentname(),enrollmentDTO.getCid(),enrollmentDTO.getCoursename(),enrollmentDTO.getDate(),enrollmentDTO.getUpfrontpayment(),enrollmentDTO.getRemainingfee(),enrollmentDTO.getComment()));
+            observableList.add(new EnrollmentTm(enrollmentDTO.getEid(),enrollmentDTO.getSid(),enrollmentDTO.getStudentname(),enrollmentDTO.getCid(),enrollmentDTO.getCoursename(),enrollmentDTO.getDate(),enrollmentDTO.getUpfrontpayment(),enrollmentDTO.getRemainingfee()));
             tblEnrollment.setItems(observableList);
         }
     }

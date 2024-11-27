@@ -12,7 +12,7 @@ public interface EnrollmentBO extends SuperBO {
 
     boolean EnrollmentIdExists(String id) throws SQLException, ClassNotFoundException;
 
-    boolean isStudentEnrolledInCourse(String sid, String cid) throws Exception;
+    boolean isStudentEnrolledInCourse(String studentId, String courseId) throws Exception;
 
     boolean saveEnrollment(EnrollmentDto enrollmentDto) throws Exception;
 

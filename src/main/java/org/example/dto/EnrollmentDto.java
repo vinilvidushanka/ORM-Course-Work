@@ -11,12 +11,11 @@ public class EnrollmentDto {
     private LocalDate date;
     private Double upfrontpayment;
     private Double remainingfee;
-    private String comment;
 
-    public EnrollmentDto(String eid, String studentId, String studentName, String programId, String programName, LocalDate date, Double upfrontpayment, Double remainingfee) {
+    public EnrollmentDto() {
     }
 
-    public EnrollmentDto(String eid, String sid, String studentname, String cid, String coursename, LocalDate date, Double upfrontpayment, Double remainingfee, String comment) {
+    public EnrollmentDto(String eid, String sid, String studentname, String cid, String coursename, LocalDate date, Double upfrontpayment, Double remainingfee) {
         this.eid = eid;
         this.sid = sid;
         Studentname = studentname;
@@ -25,7 +24,6 @@ public class EnrollmentDto {
         this.date = date;
         this.upfrontpayment = upfrontpayment;
         this.remainingfee = remainingfee;
-        this.comment = comment;
     }
 
     public String getEid() {
@@ -92,13 +90,7 @@ public class EnrollmentDto {
         this.remainingfee = remainingfee;
     }
 
-    public String getComment() {
-        return comment;
-    }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 
     @Override
     public String toString() {
@@ -111,7 +103,6 @@ public class EnrollmentDto {
                 ", date=" + date +
                 ", upfrontpayment=" + upfrontpayment +
                 ", remainingfee=" + remainingfee +
-                ", comment='" + comment + '\'' +
                 '}';
     }
 }

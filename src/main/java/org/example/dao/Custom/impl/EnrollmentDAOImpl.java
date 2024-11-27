@@ -5,7 +5,6 @@ import org.example.dao.Custom.EnrollmentDAO;
 import org.example.entity.Enrollment;
 import org.example.entity.Programs;
 import org.example.entity.Student;
-import org.example.tm.EnrollmentTm;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;

@@ -10,15 +10,14 @@ import java.util.List;
 @Table(name = "enrollment")
 public class Enrollment {
     @Id
-    @Column(name = "enrollment_id")
     private String eid;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "sid")
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "program_id")
+    @JoinColumn(name = "cid")
     private Programs programs;
 
     @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL,orphanRemoval = true)
@@ -35,7 +34,6 @@ public class Enrollment {
         this.eid = eid;
         this.student = student;
         this.programs = programs;
-        this.paymentList = paymentList;
         this.date = date;
         this.upfrontpayment = upfrontpayment;
         this.remainingfee = remainingfee;
@@ -96,7 +94,6 @@ public class Enrollment {
     public void setRemainingfee(Double remainingfee) {
         this.remainingfee = remainingfee;
     }
-
 
     @Override
     public String toString() {
