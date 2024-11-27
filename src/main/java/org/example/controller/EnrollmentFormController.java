@@ -101,7 +101,9 @@ public class EnrollmentFormController {
 
         setCellValueFactory();
         generateNextUserId();
+
     }
+
 
     private void generateNextUserId() {
         String nextId = null;
