@@ -7,4 +7,8 @@ import java.sql.SQLException;
 
 public interface ProgramsDAO extends CrudDAO<Programs> {
     Programs getProgramById(String courseId)throws SQLException, ClassNotFoundException;
+
+    Programs findCourseById(String courseId);
+
+    int getCourseCount() throws SQLException;
 }

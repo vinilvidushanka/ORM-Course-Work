@@ -16,4 +16,7 @@ public interface ProgramsBO extends SuperBO {
 
     List<String> getAllProgramIds() throws SQLException, ClassNotFoundException;
     public Programs getProgramById(String courseId) throws Exception;
+
+    int getCourseCount() throws SQLException;
+
 }

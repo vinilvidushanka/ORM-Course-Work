@@ -6,6 +6,7 @@ import org.example.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -90,5 +91,23 @@ public class StudentDAOImpl implements StudentDAO {
         } finally {
             session.close();
         }
+    }
+
+    @Override
+    public Student findStudentById(String sid) {
+        return null;
+    }
+
+    @Override
+    public int getStudentCount() throws SQLException {
+        int studentCount = 0;
+        try (Session session = SessionFactoryConfig.getInstance().getSession()) {
+            Query<Long> query = session.createQuery("SELECT COUNT(s) FROM Student s", Long.class);
+            studentCount = query.uniqueResult().intValue();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new SQLException("Failed to fetch student count from the database", e);
+        }
+        return studentCount;
     }
 }

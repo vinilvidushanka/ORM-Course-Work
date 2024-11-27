@@ -12,6 +12,7 @@ import org.example.bo.custom.ProgramsBO;
 import org.example.bo.custom.StudentBO;
 import org.example.dto.EnrollmentDto;
 import org.example.dto.ProgramsDto;
+import org.example.entity.Enrollment;
 import org.example.entity.Programs;
 import org.example.entity.Student;
 import org.example.tm.EnrollmentTm;
@@ -22,6 +23,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 public class EnrollmentFormController {
 
@@ -185,8 +187,21 @@ public class EnrollmentFormController {
     }
 
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {
+    void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
+        if (result.orElse(no) == yes) {
+            if (!enrollmentBo.deleteEnrollment(ID)) {
+                new Alert(Alert.AlertType.ERROR, "Error!!").show();
+            }
+        }
+        clearTextFileds();
+        generateNextUserId();
+        getAll();
+        loadStudentIds();
+        loadProgramsIds();
     }
 
     @FXML
@@ -250,8 +265,34 @@ public class EnrollmentFormController {
     }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) {
+    void btnUpdateOnAction(ActionEvent event) throws Exception {
+        String id = txtEnrollmentId.getText();
+        String sid = cmbStudentId.getValue();
+        String studentname = txtStudentName.getText();
+        String cid = cmbProgramId.getValue();
+        String coursename = txtProgram.getText();
+        LocalDate date = LocalDate.parse(txtDate.getText());
+        Double upfrontpayment = Double.valueOf(txtUpFrontPayment.getText());
+        Enrollment enrollmentById = enrollmentBo.findEnrollmentById(id);
+        Double newremainfeecalculate = newremainfeecalculate(enrollmentById, upfrontpayment);
 
+        if(enrollmentBo.updateEnrollment(new EnrollmentDto(id, sid,studentname,cid,coursename,date,upfrontpayment,newremainfeecalculate))){
+            new Alert(Alert.AlertType.CONFIRMATION, "Update Successfully!!").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Error!!").show();
+        }
+        clearTextFileds();
+        generateNextUserId();
+        getAll();
+        loadStudentIds();
+        loadProgramsIds();
+    }
+
+    private Double newremainfeecalculate(Enrollment enrollment, Double newupfrontpayment) {
+        Double upfrontpayment = enrollment.getUpfrontpayment();
+        Double remainingfee = enrollment.getRemainingfee();
+        double fee = (remainingfee + upfrontpayment) - newupfrontpayment;
+        return fee;
     }
 
     @FXML

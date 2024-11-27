@@ -95,4 +95,30 @@ public class EnrollmentBOImpl implements EnrollmentBO {
     public boolean updateRemainingFee(String enrollmentId, double newFee) {
         return enrollmentDAO.updateRemainingFee(enrollmentId,newFee);
     }
+
+    @Override
+    public boolean deleteEnrollment(String ID) throws SQLException, ClassNotFoundException {
+        return enrollmentDAO.delete(ID);
+    }
+
+    @Override
+    public boolean updateEnrollment(EnrollmentDto enrollmentDto) throws Exception {
+        Student student = studentDAO.findStudentById(enrollmentDto.getSid());
+        Programs programs = programsDAO.findCourseById(enrollmentDto.getCid());
+
+        if (student == null || programs == null) {
+            throw new Exception("Student or Course not found.");
+        }
+
+        Enrollment enrollment = new Enrollment(
+                enrollmentDto.getEid(),
+                student,
+                programs,
+                enrollmentDto.getDate(),
+                enrollmentDto.getUpfrontpayment(),
+                enrollmentDto.getRemainingfee()
+        );
+
+        return enrollmentDAO.update(enrollment);
+    }
 }

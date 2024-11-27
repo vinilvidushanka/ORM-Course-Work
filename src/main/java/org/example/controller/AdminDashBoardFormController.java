@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.bo.BOFactory;
 import org.example.bo.custom.ProgramsBO;
+import org.example.bo.custom.StudentBO;
 import org.example.config.SessionFactoryConfig;
 import org.example.dto.ProgramsDto;
 import org.example.entity.Programs;
@@ -75,6 +76,7 @@ public class AdminDashBoardFormController {
     }
 
     ProgramsBO programsBO = (ProgramsBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROGRAMS);
+    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.STUDENT);
 
     ObservableList<Programs> observableList;
     private int studentCount;
@@ -83,6 +85,17 @@ public class AdminDashBoardFormController {
         initClock();
         loadAllPrograms();
         setCellValueFactory();
+
+        try {
+            int programsCount = programsBO.getCourseCount();
+            int studentCount = studentBO.getStudentCount();
+            lblProgramsCount.setText(String.valueOf(programsCount));
+            lblStudentCount.setText(String.valueOf(studentCount));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to load counts from database.").show();
+        }
     }
 
     private void loadAllPrograms() {

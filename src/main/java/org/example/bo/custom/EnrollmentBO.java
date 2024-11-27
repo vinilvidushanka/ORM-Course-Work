@@ -25,4 +25,8 @@ public interface EnrollmentBO extends SuperBO {
     double getRemainingFeeByEnrollmentId(String eid);
 
     boolean updateRemainingFee(String eid, double updatedRemainFee);
+
+    boolean deleteEnrollment(String id) throws SQLException, ClassNotFoundException;
+
+    boolean updateEnrollment(EnrollmentDto enrollmentDto) throws Exception;
 }

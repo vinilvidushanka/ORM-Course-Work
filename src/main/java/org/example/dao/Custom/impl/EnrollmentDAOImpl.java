@@ -51,8 +51,36 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean delete(String ID) throws SQLException, ClassNotFoundException {
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction tx = session.beginTransaction();
+
+        try {
+            Enrollment enrollment = session.get(Enrollment.class, ID);
+            if (enrollment != null) {
+                Student student = enrollment.getStudent();
+                Programs programs = enrollment.getPrograms();
+
+                if (student != null) {
+                    student.removeEnrollment(enrollment);
+                }
+                if (programs != null) {
+                    programs.removeEnrollment(enrollment);
+                }
+
+                session.delete(enrollment);
+                tx.commit();
+                return true;
+            } else {
+                tx.rollback();
+                return false;
+            }
+        } catch (Exception e) {
+            tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 
     @Override

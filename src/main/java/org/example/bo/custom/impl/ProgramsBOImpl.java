@@ -58,4 +58,9 @@ public class ProgramsBOImpl implements ProgramsBO {
     public Programs getProgramById(String courseId) throws Exception {
         return programsDAO.getProgramById(courseId);
     }
+
+    @Override
+    public int getCourseCount() throws SQLException {
+        return programsDAO.getCourseCount();
+    }
 }
