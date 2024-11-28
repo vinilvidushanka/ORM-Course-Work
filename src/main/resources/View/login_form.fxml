@@ -42,7 +42,7 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <JFXButton blendMode="SRC_ATOP" buttonType="RAISED" cache="true" graphicTextGap="9.0" layoutX="105.0" layoutY="418.0" onAction="#btnLoginOnAction" prefHeight="32.0" prefWidth="256.0" style="-fx-background-color: #212884;" styleClass="edge button" text="Login" textFill="WHITE">
+            <JFXButton blendMode="SRC_ATOP" buttonType="RAISED" cache="true" graphicTextGap="9.0" layoutX="105.0" layoutY="430.0" onAction="#btnLoginOnAction" prefHeight="32.0" prefWidth="256.0" style="-fx-background-color: #212884;" styleClass="edge button" text="Login" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -62,15 +62,15 @@
             </Label>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="471.0" fitWidth="459.0" layoutX="541.0">
+      <ImageView fitHeight="366.0" fitWidth="524.0" layoutX="475.0" layoutY="234.0">
          <image>
-            <Image url="@../Assets/1716884827539Jigyasa%20University%20Creatives_04.jpg" />
+            <Image url="@../Assets/creative-culinary-arts-chef-preparing-gourmet-dish-white-background_431161-24602.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="530.0" layoutY="501.0" text="The Culinary Academy" textFill="DARKORANGE">
-         <font>
-            <Font name="Sumdumgoi Regular" size="26.0" />
-         </font>
-      </Label>
+      <ImageView fitHeight="246.0" fitWidth="256.0" layoutX="609.0" layoutY="-19.0">
+         <image>
+            <Image url="@../Assets/A_letter_tech_logo__1_-removebg-preview.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
