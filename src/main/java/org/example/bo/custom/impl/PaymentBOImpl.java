@@ -42,4 +42,19 @@ public class PaymentBOImpl implements PaymentBO {
         Enrollment enrollment = enrollmentDAO.findEnrollmentById(paymentDTO.getEid());
         return paymentDAO.save(new Payment(paymentDTO.getId(),enrollment,paymentDTO.getAmount(),paymentDTO.getDate()));
     }
+
+    @Override
+    public boolean deletePayment(String ID) throws SQLException, ClassNotFoundException {
+        return paymentDAO.delete(ID);
+    }
+
+    @Override
+    public Payment findPaymentById(String paymentId) {
+        return paymentDAO.findPaymentById(paymentId);
+    }
+
+    @Override
+    public boolean updatePayment(PaymentDto paymentDto) {
+        return false;
+    }
 }

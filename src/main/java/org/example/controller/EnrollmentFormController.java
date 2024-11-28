@@ -17,6 +17,7 @@ import org.example.entity.Programs;
 import org.example.entity.Student;
 import org.example.tm.EnrollmentTm;
 import org.example.tm.ProgramsTm;
+import org.example.tm.StudentTm;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -93,6 +94,13 @@ public class EnrollmentFormController {
             loadStudentIds();
             loadProgramsIds();
             setCellValueFactory();
+
+            tblEnrollment.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    setFieldsWithSelectedRowData(newValue);
+                }
+            });
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -144,6 +152,17 @@ public class EnrollmentFormController {
         cmbStudentId.getItems().addAll(studentIds);
     }
 
+    private void setFieldsWithSelectedRowData(EnrollmentTm selectedEnrollment) {
+        txtEnrollmentId.setText(selectedEnrollment.getEid());
+        cmbStudentId.setValue(selectedEnrollment.getSid());
+        txtStudentName.setText(selectedEnrollment.getStudentname());
+        cmbProgramId.setValue(selectedEnrollment.getCid());
+        txtProgram.setText(selectedEnrollment.getCoursename());
+        txtDate.setText(String.valueOf(selectedEnrollment.getDate()));
+        txtUpFrontPayment.setText(String.valueOf(selectedEnrollment.getUpfrontpayment()));
+        txtTotalFee.setText(String.valueOf(selectedEnrollment.getRemainingfee()));
+    }
+
     private void getAllEnrollments() throws SQLException, ClassNotFoundException {
 //        tblEnrollment.getItems().clear();
 //        observableList = FXCollections.observableArrayList();
@@ -183,7 +202,18 @@ public class EnrollmentFormController {
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
+        clearFields();
+    }
 
+    private void clearFields() {
+        txtEnrollmentId.setText("");
+        cmbStudentId.setValue(null);
+        txtStudentName.setText("");
+        cmbProgramId.setValue(null);
+        txtProgram.setText("");
+        txtDate.setText("");
+        txtUpFrontPayment.setText("");
+        txtTotalFee.setText("");
     }
 
     @FXML

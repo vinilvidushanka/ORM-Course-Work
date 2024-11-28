@@ -7,6 +7,7 @@ import org.example.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -89,5 +90,32 @@ public class UserDAOImpl implements UserDAO {
         }else {
             return false;
         }
+    }
+
+    @Override
+    public User findUserByname(String username) {
+        Transaction transaction = null;
+        User user = null;
+
+        try (Session session = SessionFactoryConfig.getInstance().getSession()) {
+            transaction = session.beginTransaction();
+
+            Query<User> query = session.createQuery("FROM User u WHERE u.userName = :username", User.class);
+            query.setParameter("username", username);
+            user = query.uniqueResult();
+
+            if (user == null) {
+                System.out.println("No user found with username: " + username);
+            }
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
+        }
+
+        return user;
     }
 }

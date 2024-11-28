@@ -15,6 +15,8 @@ import org.example.bo.BOFactory;
 import org.example.bo.custom.UserBO;
 import org.example.dao.Custom.UserDAO;
 import org.example.dao.DAOFactory;
+import org.example.entity.User;
+import org.example.util.PasswordVerifier;
 
 import java.io.IOException;
 
@@ -43,35 +45,74 @@ public class LoginFormController {
 
     @FXML
     void btnLoginOnAction(ActionEvent event) throws IOException {
-        String username = txtUserName.getText();
-        String password = txtPassword.getText();
-        String role=cmbRole.getValue();
+            String username = txtUserName.getText();
+            String password = txtPassword.getText();
+            String role=cmbRole.getValue();
 
-        if (userDAO.checkPassword(username,password)){
-            if (role.toString().contains("Admin")){
-                AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/View/admin_dashboard_form.fxml"));
+            if (userDAO.checkPassword(username,password)){
+                if (role.toString().contains("Admin")){
+                    AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/View/admin_dashboard_form.fxml"));
 
-                Scene scene = new Scene(rootNode);
+                    Scene scene = new Scene(rootNode);
 
-                Stage stage = (Stage) this.rootNode.getScene().getWindow();
-                stage.setScene(scene);
-                stage.centerOnScreen();
-                stage.setTitle("Dashboard Form");
+                    Stage stage = (Stage) this.rootNode.getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.centerOnScreen();
+                    stage.setTitle("Dashboard Form");
+                }else {
+                    AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/View/coordinator_dashboard_form.fxml"));
+
+                    Scene scene = new Scene(rootNode);
+
+                    Stage stage = (Stage) this.rootNode.getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.centerOnScreen();
+                    stage.setTitle("Dashboard Form");
+                }
+
+                //SignInForm.getScene().getWindow().hide();
             }else {
-                AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/View/coordinator_dashboard_form.fxml"));
-
-                Scene scene = new Scene(rootNode);
-
-                Stage stage = (Stage) this.rootNode.getScene().getWindow();
-                stage.setScene(scene);
-                stage.centerOnScreen();
-                stage.setTitle("Dashboard Form");
+                new Alert(Alert.AlertType.ERROR,"Please Check Username and password !!").show();
             }
 
-            //SignInForm.getScene().getWindow().hide();
-        }else {
-            new Alert(Alert.AlertType.ERROR,"Please Check Username and password !!").show();
-        }
+//            String username  = txtUserName.getText().trim();
+//            String password = txtPassword.getText().trim();
+//        User userByname = userBO.findUserByname(username);
+//        String userid;
+//        String role;
+//        int x ;
+//
+//        if (userByname != null) {
+//            userid = userByname.getUserId();
+//            role = userByname.getRole();
+//            String password1 = userByname.getPassword();
+//            if (PasswordVerifier.verifyPassword(password,password1)){
+//                if(role.equals("admin")){
+//                    AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/View/admin_dashboard_form.fxml"));
+//
+//                    Scene scene = new Scene(rootNode);
+//
+//                    Stage stage = (Stage) this.rootNode.getScene().getWindow();
+//                    stage.setScene(scene);
+//                    stage.centerOnScreen();
+//                    stage.setTitle("Dashboard Form");
+//                }else {
+//                    AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/View/coordinator_dashboard_form.fxml"));
+//
+//                    Scene scene = new Scene(rootNode);
+//
+//                    Stage stage = (Stage) this.rootNode.getScene().getWindow();
+//                    stage.setScene(scene);
+//                    stage.centerOnScreen();
+//                    stage.setTitle("Dashboard Form");
+//                }
+//
+//            } else {
+//                new Alert(Alert.AlertType.ERROR, "Invalid password! Please try again.").show();
+//            }
+//        } else {
+//            new Alert(Alert.AlertType.ERROR, "Username does not exist! Please check your username.").show();
+//        }
 
         txtUserName.clear();
         txtPassword.clear();

@@ -2,9 +2,11 @@ package org.example.dao.Custom.impl;
 
 import org.example.config.SessionFactoryConfig;
 import org.example.dao.Custom.PaymentDAO;
+import org.example.dto.PaymentDto;
 import org.example.entity.Payment;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,8 +40,21 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean delete(String ID) throws SQLException, ClassNotFoundException {
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction tx = session.beginTransaction();
+
+        Payment payment = session.get(Payment.class, ID);
+        if (payment != null) {
+            session.delete(payment);
+            tx.commit();
+            session.close();
+            return true;
+        } else {
+            tx.rollback();
+            session.close();
+            return false;
+        }
     }
 
     @Override
@@ -66,5 +81,26 @@ public class PaymentDAOImpl implements PaymentDAO {
                 return "P001";
             }
         }
+    }
+
+    @Override
+    public Payment findPaymentById(String paymentId) {
+        Transaction transaction = null;
+        Payment payment = null;
+
+        try (Session session = SessionFactoryConfig.getInstance().getSession()) {
+            transaction = session.beginTransaction();
+
+            Query<Payment> query = session.createQuery("FROM Payment p WHERE p.id = :id", Payment.class);
+            query.setParameter("id", paymentId);
+            payment = query.uniqueResult();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            throw e;
+        }
+
+        return payment;
     }
 }

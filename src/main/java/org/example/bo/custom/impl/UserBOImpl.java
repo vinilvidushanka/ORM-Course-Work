@@ -46,5 +46,10 @@ public class UserBOImpl implements UserBO {
     public String generateNewUserID() throws SQLException, ClassNotFoundException, IOException {
         return null;
     }
+
+    @Override
+    public User findUserByname(String username) {
+        return userDAO.findUserByname(username);
+    }
 }
 

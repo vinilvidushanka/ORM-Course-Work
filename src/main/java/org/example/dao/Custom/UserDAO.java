@@ -8,4 +8,6 @@ import java.io.IOException;
 
 public interface UserDAO extends CrudDAO<User> {
     boolean checkPassword(String username, String password) throws IOException;
+
+    User findUserByname(String username);
 }
