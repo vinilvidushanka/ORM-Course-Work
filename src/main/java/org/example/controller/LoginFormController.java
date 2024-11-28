@@ -36,7 +36,6 @@ public class LoginFormController {
     @FXML
     private TextField txtUserName;
 
-    private final UserBO userBO = (UserBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.USER);
     UserDAO userDAO = (UserDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.USER);
 
     public void initialize(){
@@ -116,7 +115,7 @@ public class LoginFormController {
 
         txtUserName.clear();
         txtPassword.clear();
-//        cmbRole.clone();
+        cmbRole.setValue(null);
     }
 
 
